@@ -1,6 +1,6 @@
 {
     "private": false,
-    "version": "1.0.1",
+    "version": "1.0.2",
     "types": "./dist/index.d.ts",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -10,7 +10,7 @@
         "@babel/core": "^7.8.4",
         "@babel/plugin-proposal-optional-catch-binding": "^7.8.3",
         "@babel/preset-env": "^7.8.4",
-        "@masx200/event-emitter-target": "https://gitee.com/masx200/event-emitter-target.git",
+        "@masx200/event-emitter-target": "https://github.com/masx200/event-emitter-target.git",
         "@rollup/plugin-commonjs": "^11.0.2",
         "@rollup/plugin-json": "^4.0.2",
         "@rollup/plugin-node-resolve": "^7.1.1",
@@ -36,5 +36,5 @@
     "keywords": [],
     "author": "masx200 <34191203+masx200@users.noreply.github.com>",
     "description": "异步任务限流器 async-task-current-limiter",
-    "repository": "https://gitee.com/masx200/async-task-current-limiter"
+    "repository": "https://github.com/masx200/async-task-current-limiter"
 }
