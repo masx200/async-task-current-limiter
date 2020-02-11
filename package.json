@@ -1,4 +1,7 @@
 {
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
     "private": false,
     "version": "1.0.2",
     "types": "./dist/index.d.ts",
