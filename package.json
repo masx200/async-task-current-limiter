@@ -1,0 +1,39 @@
+{
+    "version": "1.0.0",
+    "types": "./dist/index.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "type": "module",
+    "name": "@masx200/asynchronous-task-current-limiter",
+    "devDependencies": {
+        "@babel/core": "^7.8.4",
+        "@babel/plugin-proposal-optional-catch-binding": "^7.8.3",
+        "@babel/preset-env": "^7.8.4",
+        "@masx200/event-emitter-target": "https://gitee.com/masx200/event-emitter-target.git",
+        "@rollup/plugin-commonjs": "^11.0.2",
+        "@rollup/plugin-json": "^4.0.2",
+        "@rollup/plugin-node-resolve": "^7.1.1",
+        "@types/node": "^13.1.4",
+        "prettier": "^1.19.1",
+        "rollup": "^1.31.0",
+        "rollup-plugin-babel": "^4.3.3",
+        "rollup-plugin-sourcemaps": "^0.5.0",
+        "rollup-plugin-terser": "^5.2.0",
+        "rollup-plugin-ts": "^1.2.14",
+        "terser": "^4.6.3",
+        "tslib": "^1.10.0",
+        "typescript": "^3.8.1-rc",
+        "rollup-plugin-typescript2": "^0.25.3"
+    },
+    "dependencies": {},
+    "license": "MIT",
+    "scripts": {
+        "prettier": "prettier *.js --write&&prettier *.json --write && prettier *.md --write&&prettier --parser=typescript --write ./src/**/*.ts",
+        "watch": "rollup --watch -c  rollup.config.js ",
+        "build": "rollup -c  rollup.config.js "
+    },
+    "keywords": [],
+    "author": "masx200 <34191203+masx200@users.noreply.github.com>",
+    "description": "异步任务限流器 asynchronous-task-current-limiter",
+    "repository": "https://gitee.com/masx200/asynchronous-task-current-limiter"
+}
