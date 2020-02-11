@@ -1,11 +1,14 @@
 {
     "compilerOptions": {
-        "paths": {},
+        "declarationDir": "dist",
+        "paths": {
+            "@masx200/async-task-current-limiter": ["./src/index.ts"]
+        },
         "plugins": [],
-        "types": [],
+
         "baseUrl": ".",
-        "rootDir": "./src",
-        "outDir": "./",
+        // "rootDir": "./",
+        // "outDir": "./",
         "sourceMap": true,
         "moduleResolution": "node",
         "pretty": true,
@@ -26,5 +29,5 @@
         "allowSyntheticDefaultImports": true
     },
     "exclude": [],
-    "include": ["./src/*.ts"]
+    "include": ["./src/*.ts", "./**/*.ts", "example/example.ts", "*.ts"]
 }

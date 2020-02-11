@@ -1,8 +1,8 @@
-# asynchronous-task-current-limiter
+# async-task-current-limiter
 
 # 介绍
 
-异步任务限流器 asynchronous-task-current-limiter
+异步任务限流器 async-task-current-limiter
 
 为了解决`Error: EMFILE, too many open files`的问题而生.
 
@@ -15,13 +15,13 @@
 # 安装教程
 
 ```shell
-yarn add https://github.com/masx200/asynchronous-task-current-limiter.git
+yarn add https://github.com/masx200/async-task-current-limiter.git
 ```
 
 # 使用说明
 
 ```js
-import AsyncLimiterClass from "@masx200/asynchronous-task-current-limiter";
+import AsyncLimiterClass from "@masx200/async-task-current-limiter";
 ```
 
 # 示例
@@ -82,7 +82,7 @@ for (let i = 0; i < 1000; i++) {
 
 # API
 
-https://github.com/masx200/asynchronous-task-current-limiter/blob/master/dist/index.d.ts
+https://github.com/masx200/async-task-current-limiter/blob/master/dist/index.d.ts
 
 ```ts
 interface Constructor<T extends (...args: any[]) => any> {
@@ -232,3 +232,21 @@ interface statusdata {
 ## `asynclimiter.queue.current`
 
 异步限流器的异步任务队列中已经执行的任务个数
+
+# 应用解决问题
+
+使用异步限流器解决同时打开过多文件的报错
+
+```ts
+import fs from "fs";
+import AsyncLimiterClass from "@masx200/async-task-current-limiter";
+const asynclimiter = AsyncLimiterClass(70);
+
+declare const files: string[];
+const limitreadfile = asynclimiter.asyncwrap(fs.promises.readFile);
+files.forEach(async file => {
+    const buf = await limitreadfile(file);
+    console.log(buf);
+});
+
+```

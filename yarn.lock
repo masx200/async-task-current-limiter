@@ -727,7 +727,7 @@
 
 "@masx200/event-emitter-target@https://gitee.com/masx200/event-emitter-target.git":
   version "1.1.5"
-  resolved "https://gitee.com/masx200/event-emitter-target.git#dd0c1c05be015d41fa0dd2a191dbe1d7a71c8d98"
+  resolved "https://gitee.com/masx200/event-emitter-target.git#016814d28fddf422727d8ee938c0c3f7dcadc110"
 
 "@rollup/plugin-commonjs@^11.0.2":
   version "11.0.2"
@@ -813,7 +813,7 @@
   resolved "https://registry.npm.taobao.org/@types/estree/download/@types/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha1-4Xfmme4bjCLSMXTKqnQiZEOJUJ8=
 
-"@types/node@*", "@types/node@^13.1.4", "@types/node@^13.5.0":
+"@types/node@*", "@types/node@^13.5.0", "@types/node@^13.7.0":
   version "13.7.0"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-13.7.0.tgz#b417deda18cf8400f278733499ad5547ed1abec4"
   integrity sha1-tBfe2hjPhADyeHM0ma1VR+0avsQ=
