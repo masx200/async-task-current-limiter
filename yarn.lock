@@ -725,9 +725,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@masx200/event-emitter-target@https://gitee.com/masx200/event-emitter-target.git":
+"@masx200/event-emitter-target@^1.1.5":
   version "1.1.5"
-  resolved "https://gitee.com/masx200/event-emitter-target.git#016814d28fddf422727d8ee938c0c3f7dcadc110"
+  resolved "https://registry.npmjs.org/@masx200/event-emitter-target/-/event-emitter-target-1.1.5.tgz#d176c743eb67dca7d65984293c19a56284d55e03"
+  integrity sha512-+SIaAsoFZ0UioQRrQ0Yf7prpfchsx4G4KunDFsSJSo3haVBk2IXOI4PdE+Mg6hiSelSHoxgIf5MUbjlglMpnxQ==
 
 "@rollup/plugin-commonjs@^11.0.2":
   version "11.0.2"

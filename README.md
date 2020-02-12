@@ -248,5 +248,4 @@ files.forEach(async file => {
     const buf = await limitreadfile(file);
     console.log(buf);
 });
-
 ```

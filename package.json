@@ -3,7 +3,7 @@
         "registry": "https://registry.npmjs.org/"
     },
     "private": false,
-    "version": "1.0.2",
+    "version": "1.0.3",
     "types": "./dist/index.d.ts",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -13,7 +13,6 @@
         "@babel/core": "^7.8.4",
         "@babel/plugin-proposal-optional-catch-binding": "^7.8.3",
         "@babel/preset-env": "^7.8.4",
-        "@masx200/event-emitter-target": "https://github.com/masx200/event-emitter-target.git",
         "@rollup/plugin-commonjs": "^11.0.2",
         "@rollup/plugin-json": "^4.0.2",
         "@rollup/plugin-node-resolve": "^7.1.1",
@@ -29,7 +28,9 @@
         "tslib": "^1.10.0",
         "typescript": "^3.8.1-rc"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@masx200/event-emitter-target": "^1.1.5"
+    },
     "license": "MIT",
     "scripts": {
         "prettier": "prettier *.js --write&&prettier *.json --write && prettier *.md --write&&prettier --parser=typescript --write ./src/**/*.ts",
