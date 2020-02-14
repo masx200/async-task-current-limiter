@@ -1,25 +1,40 @@
-function t(t){if("string"!=typeof t&&"symbol"!=typeof t)throw new TypeError(" EVENTNAME expected: string | symbol;but invalid :"+t)}function e(t){if("function"!=typeof t)throw new TypeError(" EVENTLISTENER expected: (event?: any) => void;but invalid:"+t)}const n="EventEmitterTarget";function o(){return {}.toString.call({[Symbol.toStringTag]:n})}function i(){const r=function(){const i=new Map,r=new WeakMap;function s(t){let e=i.get(t);return e||(e=new Set,i.set(t,e)),e}function c(e){t(e),i.has(e)&&s(e).clear();}function u(e,n){t(e),i.has(e)&&s(e).forEach(t=>{Promise.resolve().then(()=>{t(n);});});}function f(n,o){t(n),e(o),s(n).add(o);}function a(t,e){s(t).delete(e);}function l(n,o){t(n),e(o),a(n,o),function(t,e){const n=s(t);let o=r.get(e);o&&n.delete(o);}(n,o);}function m(){return [...i].map(([t,e])=>[t,[...e]])[Symbol.iterator]()}return {[Symbol.toPrimitive]:o,[Symbol.toStringTag]:n,[Symbol.iterator]:m,entries:m,listenerCount:function(e){return t(e),i.has(e)?s(e).size:0},clear:c,removeAllListeners:c,on:f,addListener:f,off:l,removeListener:l,once:function(n,o){t(n),e(o);let i=!1,s=r.get(o);if(!s){const t=e=>{a(n,t),a(n,o),i||(i=!0,o(e));};s=t,r.set(o,s);}a(n,o),f(n,s);},emit:u,dispatch:u,eventNames:function(){return [...i.keys()]},listeners:function(e){return t(e),i.has(e)?[...s(e)]:[]}}}();return this&&this instanceof i?(Object.assign(this,r),this):r}
+type FUNRETPRO<T> = (...arg: any[]) => Promise<T>;
 
-function promisedefer() {
-    let resolve = (value) => void 0;
-    let reject = (reason) => void 0;
-    const promise = new Promise((res, rej) => {
-        resolve = res;
-        reject = rej;
-    });
-    return { promise, reject, resolve };
+type 空闲状态 = "free" | "full";
+
+interface FUNANDARGS<T, S extends FUNRETPRO<T>> extends Array<any> {
+    0: S;
+    1: Parameters<S>;
+    length: 2;
 }
 
-function createlimiter(max) {
+import createeventtarget, {
+    EventEmitterTarget
+} from "@masx200/event-emitter-target";
+import promisedefer from "./promisedefer";
+// import { FUNANDARGS, FUNRETPRO, 空闲状态 } from './index';
+export function createlimiter(max: number) {
     if (!(typeof max === "number" && max > 0 && Infinity > max)) {
         throw TypeError(" MAX expected: number;but invalid:" + max);
     }
     const 同时读取的最大文件数 = max;
-    const cachepromise = new Map();
+    const cachepromise = new Map<number, ReturnType<typeof promisedefer>>();
+    // const cachesymbol = new Map<string, symbol>();
+    // const getsymbolcached = (name: string) => {
+    //     const cached = cachesymbol.get(name);
+    //     if (cached) {
+    //         return cached;
+    //     }
+    //     else {
+    //         const s = Symbol(name);
+    //         cachesymbol.set(name, s);
+    //         return s;
+    //     }
+    // };
     let pointer = 0;
     let 当前同时读取的文件数 = 0;
-    const target = i();
-    const queue = [];
+    const target: EventEmitterTarget = createeventtarget();
+    const queue: (undefined | FUNANDARGS<any, any>)[] = [];
     let shouldrun = true;
     target.on("free", () => {
         shouldrun = true;
@@ -49,14 +64,15 @@ function createlimiter(max) {
         const [fun, args] = funargs;
         const promise = Promise.resolve(Reflect.apply(fun, undefined, args));
         const settle = () => {
+            // target.emit(getsymbolcached("settle" + index), promise);
             const defer = cachepromise.get(index);
             if (defer) {
                 defer.resolve(promise);
-            }
-            else {
+            } else {
                 throw new Error();
             }
             decre();
+            /* 内存垃圾回收 */
             queue[index] = undefined;
         };
         promise.then(settle, settle);
@@ -65,7 +81,9 @@ function createlimiter(max) {
             next();
         });
     }
-    function add(funargs) {
+    function add<T, S extends FUNRETPRO<T>>(
+        funargs: FUNANDARGS<T, S>
+    ): Promise<T> {
         let index = queue.length;
         queue.push(funargs);
         if (status() === "free") {
@@ -74,17 +92,28 @@ function createlimiter(max) {
         }
         const defer = promisedefer();
         cachepromise.set(index, defer);
-        return Promise.resolve(defer.promise);
+        return Promise.resolve(defer.promise) as Promise<T>;
+        /*  return new Promise<T>(res => {
+            target.once(
+                getsymbolcached("settle" + index),
+                (settledpromise: Promise<T>) => {
+                    res(settledpromise);
+                }
+            );
+        }); */
     }
-    function status() {
+    function status(): 空闲状态 {
         return 当前同时读取的文件数 < 同时读取的最大文件数 ? "free" : "full";
     }
-    const asyncwrap = function (fun) {
-        return async function (...args) {
+    const asyncwrap = function<T extends (...args: any[]) => Promise<any>>(
+        fun: T
+    ): T {
+        return async function(...args: Parameters<T>) {
             return await add([fun, args]);
-        };
+        } as T;
     };
     const 文件读取队列 = {
+        // add,
         asyncwrap,
         status,
         limiter: {
@@ -121,8 +150,7 @@ function createlimiter(max) {
         };
         if (当前同时读取的文件数 >= 同时读取的最大文件数) {
             target.emit("full", data);
-        }
-        else {
+        } else {
             target.emit("free", data);
         }
     }
@@ -130,28 +158,9 @@ function createlimiter(max) {
         if (当前同时读取的文件数 < 同时读取的最大文件数) {
             当前同时读取的文件数++;
             dispatchstatus();
-        }
-        else {
+        } else {
             throw Error();
         }
     }
     return 文件读取队列;
 }
-
-var index = (() => {
-    new Function("return async()=>{}")()();
-    function AsyncLimiterClass(max) {
-        const asynclimiter = createlimiter(max);
-        if (this && this instanceof AsyncLimiterClass) {
-            Object.assign(this, asynclimiter);
-            return this;
-        }
-        else {
-            return asynclimiter;
-        }
-    }
-    return AsyncLimiterClass;
-})();
-
-export default index;
-//# sourceMappingURL=index.js.map

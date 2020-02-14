@@ -23,6 +23,7 @@ const mybabelplugin = babel({
     ]
 });
 const myterserplugin = terser({
+    module:true,
     sourcemap: true,
     toplevel: true,
     output: {
@@ -36,7 +37,7 @@ const myterserplugin = terser({
         drop_debugger: true,
         pure_funcs: ["console.log"]
     },
-    mangle: { properties: false }
+    mangle:true
 });
 export default [
     {
@@ -49,30 +50,50 @@ export default [
             }
         ],
         plugins: [
+            // typescript(),
             typescript({ objectHashIgnoreUnknownHack: true }),
             sourcemaps(),
             json(),
             resolve(),
             commonjs(),
-
-            myterserplugin
+            // myterserplugin
         ]
     },
     {
         input: "./dist/index.js",
         output: [
             {
-                file: "./dist/index.js",
+                file: "./dist/index.min.js",
                 format: "esm",
                 sourcemap: true
             }
         ],
         plugins: [
+            mybabelplugin,
             sourcemaps(),
             json(),
             resolve(),
             commonjs(),
-            mybabelplugin,
+
+            // myterserplugin
+        ]
+    },
+    {
+        input: "./dist/index.min.js",
+        output: [
+            {
+                file: "./dist/index.min.js",
+                format: "esm",
+                sourcemap: true
+            }
+        ],
+        plugins: [
+            // mybabelplugin,
+            sourcemaps(),
+            json(),
+            resolve(),
+            commonjs(),
+
             myterserplugin
         ]
     }

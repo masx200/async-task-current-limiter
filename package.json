@@ -3,10 +3,10 @@
         "registry": "https://registry.npmjs.org/"
     },
     "private": false,
-    "version": "1.0.3",
+    "version": "1.0.4",
     "types": "./dist/index.d.ts",
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
+    "main": "./dist/index.min.js",
+    "module": "./dist/index.min.js",
     "type": "module",
     "name": "@masx200/async-task-current-limiter",
     "devDependencies": {
@@ -17,6 +17,7 @@
         "@rollup/plugin-json": "^4.0.2",
         "@rollup/plugin-node-resolve": "^7.1.1",
         "@types/node": "^13.7.0",
+        "live-server": "^1.2.1",
         "prettier": "^1.19.1",
         "rollup": "^1.31.0",
         "rollup-plugin-babel": "^4.3.3",
@@ -26,16 +27,17 @@
         "rollup-plugin-typescript2": "^0.25.3",
         "terser": "^4.6.3",
         "tslib": "^1.10.0",
-        "typescript": "^3.8.1-rc"
+        "typescript": "^3.7.5"
     },
     "dependencies": {
         "@masx200/event-emitter-target": "^1.1.5"
     },
     "license": "MIT",
     "scripts": {
-        "prettier": "prettier *.js --write&&prettier *.json --write && prettier *.md --write&&prettier --parser=typescript --write ./src/**/*.ts",
+        "prettier": "prettier *.js  *.json --write  *.md &&prettier --parser=typescript --write ./src/**/*.ts",
         "watch": "rollup --watch -c  rollup.config.js ",
-        "build": "rollup -c  rollup.config.js "
+        "build": "rollup -c  rollup.config.js ",
+        "test": "live-server"
     },
     "keywords": [],
     "author": "masx200 <34191203+masx200@users.noreply.github.com>",
