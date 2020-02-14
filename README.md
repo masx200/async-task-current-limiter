@@ -2,7 +2,7 @@
 
 # 介绍
 
-异步任务限流器 async-task-current-limiter
+异步任务限流器 `async-task-current-limiter`
 
 为了解决`Error: EMFILE, too many open files`的问题而生.
 
@@ -10,7 +10,7 @@
 
 当您尝试一次在系统上打开太多文件时，就会发生这种情况。
 
-由于 Node 的异步特性，如果您`fs.readFile`快速连续执行很多或类似的操作，则可以轻松达到系统的 maxfiles 限制。
+由于 `Node` 的异步特性，如果您`fs.readFile`快速连续执行很多或类似的操作，则可以轻松达到系统的 `maxfiles` 限制。
 
 # 安装教程
 
