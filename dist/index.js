@@ -85,6 +85,7 @@ function createlimiter(max) {
         };
     };
     const 文件读取队列 = {
+        [Symbol.toStringTag]: "AsyncCurrentLimiter",
         asyncwrap,
         status,
         limiter: {

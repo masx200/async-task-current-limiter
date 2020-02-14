@@ -85,16 +85,9 @@ for (let i = 0; i < 1000; i++) {
 https://github.com/masx200/async-task-current-limiter/blob/master/dist/index.d.ts
 
 ```ts
-interface Constructor<T extends (...args: any[]) => any> {
-    new (...args: Parameters<T>): ReturnType<T>;
-    (...args: Parameters<T>): ReturnType<T>;
-}
-declare type AsyncLimiterConstructor = Constructor<typeof 创建异步限流队列>;
 declare type 空闲状态 = "free" | "full";
-
-declare function 创建异步限流队列(
-    max: number
-): {
+interface AsyncCurrentLimiter {
+    [Symbol.toStringTag]: string;
     asyncwrap: <T extends (...args: any[]) => Promise<any>>(fun: T) => T;
     status: () => 空闲状态;
     limiter: {
@@ -162,7 +155,7 @@ declare function 创建异步限流队列(
             name: import("@masx200/event-emitter-target").EVENTNAME
         ) => import("@masx200/event-emitter-target").EVENTLISTENER[];
     };
-};
+}
 ```
 
 ## `AsyncLimiterClass(max)`

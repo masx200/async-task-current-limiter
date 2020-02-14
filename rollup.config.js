@@ -23,7 +23,7 @@ const mybabelplugin = babel({
     ]
 });
 const myterserplugin = terser({
-    module:true,
+    module: true,
     sourcemap: true,
     toplevel: true,
     output: {
@@ -37,7 +37,7 @@ const myterserplugin = terser({
         drop_debugger: true,
         pure_funcs: ["console.log"]
     },
-    mangle:true
+    mangle: true
 });
 export default [
     {
@@ -55,7 +55,7 @@ export default [
             sourcemaps(),
             json(),
             resolve(),
-            commonjs(),
+            commonjs()
             // myterserplugin
         ]
     },
@@ -73,7 +73,7 @@ export default [
             sourcemaps(),
             json(),
             resolve(),
-            commonjs(),
+            commonjs()
 
             // myterserplugin
         ]

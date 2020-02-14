@@ -1,19 +1,19 @@
 type FUNRETPRO<T> = (...arg: any[]) => Promise<T>;
 
-type 空闲状态 = "free" | "full";
+export type 空闲状态 = "free" | "full";
 
 interface FUNANDARGS<T, S extends FUNRETPRO<T>> extends Array<any> {
     0: S;
     1: Parameters<S>;
     length: 2;
 }
-
 import createeventtarget, {
     EventEmitterTarget
 } from "@masx200/event-emitter-target";
 import promisedefer from "./promisedefer";
+import { AsyncCurrentLimiter } from './AsyncCurrentLimiter';
 // import { FUNANDARGS, FUNRETPRO, 空闲状态 } from './index';
-export function createlimiter(max: number) {
+export function createlimiter(max: number) :AsyncCurrentLimiter{
     if (!(typeof max === "number" && max > 0 && Infinity > max)) {
         throw TypeError(" MAX expected: number;but invalid:" + max);
     }
@@ -113,6 +113,7 @@ export function createlimiter(max: number) {
         } as T;
     };
     const 文件读取队列 = {
+        [Symbol.toStringTag]: "AsyncCurrentLimiter",
         // add,
         asyncwrap,
         status,

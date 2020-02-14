@@ -3,8 +3,8 @@
         "registry": "https://registry.npmjs.org/"
     },
     "private": false,
-    "version": "1.0.4",
-    "types": "./dist/index.d.ts",
+    "version": "1.0.6",
+    "types": "./dist/src/index.d.ts",
     "main": "./dist/index.min.js",
     "module": "./dist/index.min.js",
     "type": "module",

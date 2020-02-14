@@ -1,13 +1,15 @@
 import { EventEmitterTarget } from "@masx200/event-emitter-target";
-import { statusdata } from "./status-event";
+import { AsyncCurrentLimiter } from "./AsyncCurrentLimiter";
 import { createlimiter } from "./createlimiter";
+import { statusdata } from "./status-event";
 
 interface Constructor<T extends (...args: any[]) => any> {
     new (...args: Parameters<T>): ReturnType<T>;
     (...args: Parameters<T>): ReturnType<T>;
 }
 export type AsyncLimiterConstructor = Constructor<typeof createlimiter>;
-
+export { AsyncCurrentLimiter };
+export { statusdata };
 export default (() => {
     /* 检测是否支持async函数 */
     new Function("return async()=>{}")()();
@@ -23,5 +25,3 @@ export default (() => {
     }
     return AsyncLimiterClass as AsyncLimiterConstructor;
 })();
-
-export { statusdata };
