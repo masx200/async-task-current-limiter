@@ -11,9 +11,9 @@ import createeventtarget, {
     EventEmitterTarget
 } from "@masx200/event-emitter-target";
 import promisedefer from "./promisedefer";
-import { AsyncCurrentLimiter } from './AsyncCurrentLimiter';
+import { AsyncCurrentLimiter } from "./AsyncCurrentLimiter";
 // import { FUNANDARGS, FUNRETPRO, 空闲状态 } from './index';
-export function createlimiter(max: number) :AsyncCurrentLimiter{
+export function createlimiter(max: number): AsyncCurrentLimiter {
     if (!(typeof max === "number" && max > 0 && Infinity > max)) {
         throw TypeError(" MAX expected: number;but invalid:" + max);
     }

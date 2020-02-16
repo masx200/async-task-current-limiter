@@ -1,4 +1,4 @@
-import { 空闲状态 } from "./index";
+import { 空闲状态 } from "./createlimiter";
 export interface statusdata {
     status: 空闲状态;
     queue: {
