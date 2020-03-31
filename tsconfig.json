@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "declarationDir": "dist",
+        "outDir": "",
+        // "declarationDir": "dist",
         "paths": {
             "@masx200/async-task-current-limiter": ["./src/index.ts"]
         },
@@ -15,7 +16,7 @@
         "resolveJsonModule": true,
         "declaration": true,
         "noUnusedLocals": true,
-        "checkJs": true,
+        "checkJs": false,
         "importHelpers": true,
         "removeComments": true,
         "allowJs": true,
@@ -29,5 +30,5 @@
         "allowSyntheticDefaultImports": true
     },
     "exclude": [],
-    "include": ["./src/*.ts", "./**/*.ts", "example/example.ts", "*.ts"]
+    "include": ["./src/*.ts"]
 }

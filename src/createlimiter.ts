@@ -8,7 +8,7 @@ interface FUNANDARGS<T, S extends FUNRETPRO<T>> extends Array<any> {
     length: 2;
 }
 import createeventtarget, {
-    EventEmitterTarget
+    EventEmitterTarget,
 } from "@masx200/event-emitter-target";
 import promisedefer from "./promisedefer";
 import { AsyncCurrentLimiter } from "./AsyncCurrentLimiter";
@@ -105,10 +105,10 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
     function status(): 空闲状态 {
         return 当前同时读取的文件数 < 同时读取的最大文件数 ? "free" : "full";
     }
-    const asyncwrap = function<T extends (...args: any[]) => Promise<any>>(
+    const asyncwrap = function <T extends (...args: any[]) => Promise<any>>(
         fun: T
     ): T {
-        return async function(...args: Parameters<T>) {
+        return async function (...args: Parameters<T>) {
             return await add([fun, args]);
         } as T;
     };
@@ -123,7 +123,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             },
             get current() {
                 return 当前同时读取的文件数;
-            }
+            },
         },
         queue: {
             get max() {
@@ -131,9 +131,9 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             },
             get current() {
                 return pointer;
-            }
+            },
         },
-        target
+        target,
     };
     function decre() {
         if (当前同时读取的文件数 - 1 < 0) {
@@ -147,7 +147,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
         const data = {
             status: status(),
             queue: { max: queue.max, current: queue.current },
-            limiter: { max: limiter.max, current: limiter.current }
+            limiter: { max: limiter.max, current: limiter.current },
         };
         if (当前同时读取的文件数 >= 同时读取的最大文件数) {
             target.emit("full", data);

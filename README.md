@@ -43,7 +43,7 @@ const asynclimiter = new AsyncLimiterClass(30);
 监听异步限流器的`free`和`full`的事件
 
 ```js
-const listener = data => console.log(JSON.stringify(data));
+const listener = (data) => console.log(JSON.stringify(data));
 
 asynclimiter.target.on("free", listener);
 
@@ -54,7 +54,7 @@ asynclimiter.target.on("full", listener);
 
 ```js
 async function asyncread() {
-    return await new Promise(s => {
+    return await new Promise((s) => {
         setTimeout(() => {
             s("data:" + Math.random());
         }, Math.random() * 2000);
@@ -237,7 +237,7 @@ const asynclimiter = AsyncLimiterClass(70);
 
 declare const files: string[];
 const limitreadfile = asynclimiter.asyncwrap(fs.promises.readFile);
-files.forEach(async file => {
+files.forEach(async (file) => {
     const buf = await limitreadfile(file);
     console.log(buf);
 });

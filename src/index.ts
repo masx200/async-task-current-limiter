@@ -12,16 +12,17 @@ export { AsyncCurrentLimiter };
 export { statusdata };
 export default (() => {
     /* 检测是否支持async函数 */
-    new Function("return async()=>{}")()();
-
+    var b = new Function("return async()=>{}")()();
+    var a = Symbol();
     function AsyncLimiterClass(this: any, max: number) {
         const asynclimiter = createlimiter(max);
         if (this && this instanceof AsyncLimiterClass) {
             Object.assign(this, asynclimiter);
             return this as EventEmitterTarget;
         } else {
-            return asynclimiter;
+            return Reflect.construct(AsyncLimiterClass, [max]);
         }
     }
+    Reflect.set(AsyncLimiterClass, a, b);
     return AsyncLimiterClass as AsyncLimiterConstructor;
 })();
