@@ -39,7 +39,7 @@
         "prettier": "prettier *.js --write *.json   *.md  ./**/*.ts",
         "watch": "rollup --watch -c  rollup.config.js ",
         "build": "rollup -c  rollup.config.js ",
-        "test": "live-server"
+        "test": "node ./test/index.js"
     },
     "keywords": [],
     "author": "masx200 <34191203+masx200@users.noreply.github.com>",
