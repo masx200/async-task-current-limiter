@@ -10,7 +10,7 @@
         "baseUrl": ".",
         // "rootDir": "./",
         // "outDir": "./",
-        "sourceMap": true,
+        "sourceMap": false,
         "moduleResolution": "node",
         "pretty": true,
         "resolveJsonModule": true,
