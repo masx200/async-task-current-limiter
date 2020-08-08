@@ -31,4 +31,9 @@ interface Constructor<T extends (...args: any[]) => any> {
 }
 type AsyncLimiterConstructor = Constructor<typeof createlimiter>;
 declare const _default: AsyncLimiterConstructor;
-export { _default as default, AsyncLimiterConstructor, AsyncCurrentLimiter, statusdata };
+export {
+    _default as default,
+    AsyncLimiterConstructor,
+    AsyncCurrentLimiter,
+    statusdata,
+};
