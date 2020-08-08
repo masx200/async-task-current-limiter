@@ -74,6 +74,8 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             decre();
             /* 内存垃圾回收 */
             queue[index] = undefined;
+cachepromise.delete(index)
+
         };
         promise.then(settle, settle);
         pointer++;
