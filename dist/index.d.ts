@@ -1,3 +1,4 @@
+import { EventEmitterTarget } from "@masx200/event-emitter-target";
 type 空闲状态 = "free" | "full";
 declare function createlimiter(max: number): AsyncCurrentLimiter;
 interface AsyncCurrentLimiter {
@@ -12,7 +13,7 @@ interface AsyncCurrentLimiter {
         readonly max: number;
         readonly current: number;
     };
-    target: import("@masx200/event-emitter-target").EventEmitterTarget;
+    target: EventEmitterTarget;
 }
 interface statusdata {
     status: 空闲状态;
@@ -31,9 +32,4 @@ interface Constructor<T extends (...args: any[]) => any> {
 }
 type AsyncLimiterConstructor = Constructor<typeof createlimiter>;
 declare const _default: AsyncLimiterConstructor;
-export {
-    _default as default,
-    AsyncLimiterConstructor,
-    AsyncCurrentLimiter,
-    statusdata,
-};
+export { _default as default, AsyncLimiterConstructor, AsyncCurrentLimiter, statusdata };

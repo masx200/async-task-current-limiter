@@ -1,3 +1,4 @@
+dist
 .vscode
 # Logs
 logs
@@ -104,3 +105,7 @@ typings/
 # TernJS port file
 .tern-port
 yarn.lock
+*.zip
+.yarn/install-state.gz
+.pnp.cjs
+.pnp.loader.mjs

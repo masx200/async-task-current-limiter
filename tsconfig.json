@@ -6,7 +6,6 @@
             "@masx200/async-task-current-limiter": ["./src/index.ts"]
         },
         "plugins": [],
-
         "baseUrl": ".",
         // "rootDir": "./",
         // "outDir": "./",
@@ -30,5 +29,5 @@
         "allowSyntheticDefaultImports": true
     },
     "exclude": [],
-    "include": ["./src/*.ts"]
+    "include": ["./src/*.ts", "src", "example"]
 }

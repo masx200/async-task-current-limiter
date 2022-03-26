@@ -1,9 +1,11 @@
-import babel from "@rollup/plugin-babel";
+import { babel } from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
 // import sourcemaps from "rollup-plugin-sourcemaps";
 import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
+import { defineConfig } from "rollup";
+import rollupExternalModules from "rollup-external-modules";
 import { terser } from "rollup-plugin-terser";
-import json from "@rollup/plugin-json";
 // import typescript from "@rollup/plugin-typescript";
 import typescript from "rollup-plugin-ts";
 const mybabelplugin = babel({
@@ -25,7 +27,7 @@ const mybabelplugin = babel({
 });
 const myterserplugin = terser({
     module: true,
-    sourcemap: true,
+    // sourcemap: true,
     toplevel: true,
     output: {
         comments: !1,
@@ -40,8 +42,9 @@ const myterserplugin = terser({
     },
     mangle: true,
 });
-export default [
+export default defineConfig([
     {
+        external: rollupExternalModules,
         input: "./src/index.ts",
         output: [
             {
@@ -51,7 +54,7 @@ export default [
             },
         ],
         plugins: [
-            typescript({}),
+            typescript({ transpiler: "typescript" }),
             // typescript({ objectHashIgnoreUnknownHack: true }),
             // sourcemaps(),
             json(),
@@ -61,11 +64,17 @@ export default [
         ],
     },
     {
+        external: rollupExternalModules,
         input: "./dist/index.js",
         output: [
             {
                 file: "./dist/index.min.js",
                 format: "esm",
+                sourcemap: true,
+            },
+            {exports:"auto",
+                file: "./dist/index.min.cjs",
+                format: "cjs",
                 sourcemap: true,
             },
         ],
@@ -79,4 +88,4 @@ export default [
             myterserplugin,
         ],
     },
-];
+]);
