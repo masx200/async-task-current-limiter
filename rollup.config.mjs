@@ -67,11 +67,11 @@ export default defineConfig([
         external: rollupExternalModules,
         input: "./dist/index.js",
         output: [
-            {
-                file: "./dist/index.min.js",
-                format: "esm",
-                sourcemap: true,
-            },
+            // {
+            //     file: "./dist/index.min.js",
+            //     format: "esm",
+            //     sourcemap: true,
+            // },
             {
                 exports: "auto",
                 file: "./dist/index.min.cjs",

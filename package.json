@@ -5,7 +5,7 @@
     "exports": {
         ".": {
             "require": "./dist/index.min.cjs",
-            "import": "./dist/index.min.js"
+            "import": "./dist/index.js"
         }
     },
     "publishConfig": {
@@ -14,7 +14,7 @@
     "version": "2.0.0",
     "types": "./dist/index.d.ts",
     "main": "./dist/index.min.cjs",
-    "module": "./dist/index.min.js",
+    "module": "./dist/index.js",
     "type": "module",
     "name": "@masx200/async-task-current-limiter",
     "devDependencies": {
