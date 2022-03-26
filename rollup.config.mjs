@@ -72,7 +72,8 @@ export default defineConfig([
                 format: "esm",
                 sourcemap: true,
             },
-            {exports:"auto",
+            {
+                exports: "auto",
                 file: "./dist/index.min.cjs",
                 format: "cjs",
                 sourcemap: true,
