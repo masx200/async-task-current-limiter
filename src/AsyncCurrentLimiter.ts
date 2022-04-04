@@ -1,5 +1,6 @@
 import { 空闲状态 } from "./createlimiter";
 import { EventEmitterTarget } from "@masx200/event-emitter-target";
+import { StatusData } from "./status-event";
 export interface AsyncCurrentLimiter {
     [Symbol.toStringTag]: string;
     asyncwrap: <T extends (...args: any[]) => Promise<any>>(fun: T) => T;
@@ -12,7 +13,10 @@ export interface AsyncCurrentLimiter {
         readonly max: number;
         readonly current: number;
     };
-    target: EventEmitterTarget;
+    target: EventEmitterTarget<{
+        full: StatusData;
+        free: StatusData;
+    }>;
     // {
     //     [Symbol.toPrimitive]: () => string;
     //     [Symbol.toStringTag]: string;

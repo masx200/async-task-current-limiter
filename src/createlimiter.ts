@@ -12,6 +12,7 @@ import createeventtarget, {
 } from "@masx200/event-emitter-target";
 import promisedefer from "./promisedefer";
 import { AsyncCurrentLimiter } from "./AsyncCurrentLimiter";
+import { StatusData } from "./status-event";
 // import { FUNANDARGS, FUNRETPRO, 空闲状态 } from './index';
 export function createlimiter(max: number): AsyncCurrentLimiter {
     if (!(typeof max === "number" && max > 0 && Infinity > max)) {
@@ -33,7 +34,13 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
     // };
     let pointer = 0;
     let 当前同时读取的文件数 = 0;
-    const target: EventEmitterTarget = createeventtarget();
+    const target: EventEmitterTarget<{
+        full: StatusData;
+        free: StatusData;
+    }> = createeventtarget<{
+        full: StatusData;
+        free: StatusData;
+    }>();
     const queue: (undefined | FUNANDARGS<any, any>)[] = [];
     let shouldrun = true;
     target.on("free", () => {

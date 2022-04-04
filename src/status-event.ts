@@ -1,6 +1,6 @@
 import { 空闲状态 } from "./createlimiter";
 
-export interface statusdata {
+export interface StatusData {
     status: 空闲状态;
     queue: {
         max: number;
