@@ -39,7 +39,7 @@
         "rollup-plugin-terser": "^7.0.2",
         "rollup-plugin-ts": "^2.0.5",
         "serialize-javascript": "6.0.0",
-        "terser": "^4.6.10",
+        "terser": "^5.13.1",
         "typescript": "^4.6.3"
     },
     "dependencies": {
