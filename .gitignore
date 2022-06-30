@@ -104,7 +104,7 @@ typings/
 
 # TernJS port file
 .tern-port
-yarn.lock
+#yarn.lock
 *.zip
 .yarn/install-state.gz
 .pnp.cjs
