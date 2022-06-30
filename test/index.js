@@ -1,4 +1,4 @@
-import limiterClass from "../dist/index.min.js";
+import limiterClass from "../dist/index.js";
 console.dir(limiterClass);
 const limiter = limiterClass(30);
 

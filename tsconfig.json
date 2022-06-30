@@ -19,7 +19,7 @@
         "importHelpers": true,
         "removeComments": true,
         "allowJs": true,
-        "target": "es2015",
+        "target": "esnext",
         "module": "esnext",
         "strict": true,
         "noImplicitReturns": true,

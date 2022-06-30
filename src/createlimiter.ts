@@ -66,7 +66,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
         incre();
         const funargs = queue[index];
         if (!funargs) {
-            throw Error();
+            throw Error("accident");
         }
         const [fun, args] = funargs;
         const promise = Promise.resolve(Reflect.apply(fun, undefined, args));
@@ -76,7 +76,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             if (defer) {
                 defer.resolve(promise);
             } else {
-                throw new Error();
+                throw new Error("accident");
             }
             decre();
             /* 内存垃圾回收 */
@@ -145,7 +145,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
     };
     function decre() {
         if (当前同时读取的文件数 - 1 < 0) {
-            throw Error();
+            throw Error("accident");
         }
         当前同时读取的文件数--;
         dispatchstatus();
@@ -168,7 +168,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             当前同时读取的文件数++;
             dispatchstatus();
         } else {
-            throw Error();
+            throw Error("accident");
         }
     }
     return 文件读取队列;
