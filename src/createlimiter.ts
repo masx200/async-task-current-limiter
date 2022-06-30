@@ -34,13 +34,16 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
     // };
     let pointer = 0;
     let 当前同时读取的文件数 = 0;
+    //@ts-ignore
     const target: EventEmitterTarget<{
         full: StatusData;
         free: StatusData;
-    }> = createeventtarget<{
-        full: StatusData;
-        free: StatusData;
-    }>();
+    }> =
+        //@ts-ignore
+        createeventtarget<{
+            full: StatusData;
+            free: StatusData;
+        }>();
     const queue: (undefined | FUNANDARGS<any, any>)[] = [];
     let shouldrun = true;
     target.on("free", () => {

@@ -13,6 +13,7 @@ export interface AsyncCurrentLimiter {
         readonly max: number;
         readonly current: number;
     };
+    //@ts-ignore
     target: EventEmitterTarget<{
         full: StatusData;
         free: StatusData;
