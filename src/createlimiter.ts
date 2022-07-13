@@ -72,6 +72,8 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             throw Error("accident");
         }
         const [fun, args] = funargs;
+pointer++;
+queue[index] = undefined;
         const promise = Promise.resolve(Reflect.apply(fun, undefined, args));
         const settle = () => {
             // target.emit(getsymbolcached("settle" + index), promise);
@@ -83,11 +85,11 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             }
             decre();
             /* 内存垃圾回收 */
-            queue[index] = undefined;
+            
             cachepromise.delete(index);
         };
-        promise.then(settle, settle);
-        pointer++;
+        promise.finally(settle,);
+        
         Promise.resolve().then(() => {
             next();
         });
@@ -103,6 +105,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
         }
         const defer = promisedefer();
         cachepromise.set(index, defer);
+defer.promise.finally(()=>{cachepromise.delete(index);})
         return Promise.resolve(defer.promise) as Promise<T>;
         /*  return new Promise<T>(res => {
             target.once(
