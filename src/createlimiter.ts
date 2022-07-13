@@ -66,7 +66,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             shouldrun = false;
             return;
         }
-        incre();
+        
         const funargs = queue[index];
         if (!funargs) {
             throw Error("accident fun args");
@@ -74,6 +74,7 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
         const [fun, args] = funargs;
 pointer++;
 queue[index] = undefined;
+incre();
         const promise = Promise.resolve(Reflect.apply(fun, undefined, args));
         const settle = () => {
             // target.emit(getsymbolcached("settle" + index), promise);
