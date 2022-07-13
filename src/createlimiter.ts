@@ -86,7 +86,7 @@ queue[index] = undefined;
             decre();
             /* 内存垃圾回收 */
             
-            cachepromise.delete(index);
+          //  cachepromise.delete(index);
         };
         promise.finally(settle,);
         
