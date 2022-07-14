@@ -21,16 +21,16 @@ const results=[]
 for (let i = 0; i < 500; i++) {
 
 
-results.push(new Promise(s=>{
+results.push(new Promise((s,j)=>{
 setTimeout(() => {
         limitread().then(d=>{
 console.log(d)
 s(d)
 
-});
+}).catch(j);
     }, Math.random() * 1000);
 
-})
+}))
 
     
 }
