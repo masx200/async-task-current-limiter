@@ -12,7 +12,7 @@ async function asyncread() {
     return await new Promise(s => {
         setTimeout(() => {
             s("data:" + Math.random());
-        }, Math.random() * 1000);
+        }, Math.random() * 100);
     });
 }
 
@@ -28,7 +28,7 @@ console.log(d)
 s(d)
 
 }).catch(j);
-    }, Math.random() * 1000);
+    }, Math.random() * 100);
 
 }))
 
