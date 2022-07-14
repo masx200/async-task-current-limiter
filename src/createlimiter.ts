@@ -48,7 +48,9 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
     let shouldrun = true;
     target.on("free", () => {
         shouldrun = true;
-        next();
+        Promise.resolve().then(() => {
+            next();
+        });
     });
     target.on("full", () => {
         shouldrun = false;
@@ -66,15 +68,15 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             shouldrun = false;
             return;
         }
-        
+
         const funargs = queue[index];
         if (!funargs) {
             throw Error("accident fun args");
         }
         const [fun, args] = funargs;
-pointer++;
-queue[index] = undefined;
-incre();
+        pointer++;
+        queue[index] = undefined;
+        incre();
         const promise = Promise.resolve(Reflect.apply(fun, undefined, args));
         const settle = () => {
             // target.emit(getsymbolcached("settle" + index), promise);
@@ -86,11 +88,11 @@ incre();
             }
             decre();
             /* 内存垃圾回收 */
-            
-          //  cachepromise.delete(index);
+
+            //  cachepromise.delete(index);
         };
-        promise.finally(settle,);
-        
+        promise.finally(settle);
+
         Promise.resolve().then(() => {
             next();
         });
@@ -106,7 +108,9 @@ incre();
         }
         const defer = promisedefer();
         cachepromise.set(index, defer);
-defer.promise.finally(()=>{cachepromise.delete(index);})
+        defer.promise.finally(() => {
+            cachepromise.delete(index);
+        });
         return Promise.resolve(defer.promise) as Promise<T>;
         /*  return new Promise<T>(res => {
             target.once(
@@ -159,7 +163,9 @@ defer.promise.finally(()=>{cachepromise.delete(index);})
     }
     function dispatchstatus() {
         const { queue, limiter } = 文件读取队列;
-        const data = {
+        const data: StatusData = {
+            queueSize: queue.max - queue.current,
+            pendingSize: cachepromise.size,
             status: status(),
             queue: { max: queue.max, current: queue.current },
             limiter: { max: limiter.max, current: limiter.current },

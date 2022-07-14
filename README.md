@@ -84,8 +84,6 @@ for (let i = 0; i < 1000; i++) {
 
 https://github.com/masx200/async-task-current-limiter/blob/master/dist/index.d.ts
 
-
-
 ## `AsyncLimiterClass(max)`
 
 1.当成函数使用
