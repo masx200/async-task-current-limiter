@@ -16,6 +16,7 @@ export default (() => {
         var b = new Function("return async()=>{}")()();
         var a = Symbol();
         Reflect.set(AsyncLimiterClass, a, b);
+        Reflect.set(AsyncLimiterClass, a, undefined);
     } catch {}
 
     function AsyncLimiterClass(this: any, max: number) {
