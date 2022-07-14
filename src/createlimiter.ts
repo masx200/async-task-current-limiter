@@ -131,7 +131,11 @@ export function createlimiter(max: number): AsyncCurrentLimiter {
             return await add([fun, args]);
         } as T;
     };
-    const 文件读取队列 = {
+
+    const 文件读取队列: AsyncCurrentLimiter = {
+        run(call) {
+            return asyncwrap(call)();
+        },
         [Symbol.toStringTag]: "AsyncCurrentLimiter",
         // add,
         asyncwrap,
