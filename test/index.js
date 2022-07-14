@@ -38,3 +38,4 @@ console.log(limiter);
 const ps=await Promise.all(results)
 assert(ps.length===500)
 assert(ps.every(d=>typeof d==="string"))
+console.log(ps)
