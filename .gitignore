@@ -109,3 +109,4 @@ typings/
 .yarn/install-state.gz
 .pnp.cjs
 .pnp.loader.mjs
+yarn.lock
