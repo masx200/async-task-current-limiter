@@ -41,7 +41,7 @@
         "@rollup/plugin-typescript": "^11.1.0",
 
 
-        "@types/node": "^18.0.0",
+        "@types/node": "^20.2.3",
         "acorn": "^8.7.1",
         "browserslist": "^4.21.1",
         "live-server": "^1.2.1",
